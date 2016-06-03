@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[My Octopress Blog]]></title>
+  <link href="http://graylocus.github.io/atom.xml" rel="self"/>
+  <link href="http://graylocus.github.io/"/>
+  <updated>2016-06-04T01:29:33+08:00</updated>
+  <id>http://graylocus.github.io/</id>
+  <author>
+    <name><![CDATA[Your Name]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Oh]]></title>
+    <link href="http://graylocus.github.io/blog/2016/06/04/oh/"/>
+    <updated>2016-06-04T01:23:21+08:00</updated>
+    <id>http://graylocus.github.io/blog/2016/06/04/oh</id>
+    <content type="html"><![CDATA[<h1>One category</h1>
+
+<p>categories: Sass</p>
+
+<h1>Multiple categories example 1</h1>
+
+<p>categories: [CSS3, Sass, Media Queries]</p>
+
+<h1>Multiple categories example 2</h1>
+
+<p>categories:
+- CSS3
+- Sass
+- Media Queries</p>
+]]></content>
+  </entry>
+  
+</feed>
