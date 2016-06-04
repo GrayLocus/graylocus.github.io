@@ -4,7 +4,7 @@
   <title><![CDATA[Gray Locus的小窝]]></title>
   <link href="http://graylocus.github.io/atom.xml" rel="self"/>
   <link href="http://graylocus.github.io/"/>
-  <updated>2016-06-04T13:13:58+08:00</updated>
+  <updated>2016-06-04T15:26:56+08:00</updated>
   <id>http://graylocus.github.io/</id>
   <author>
     <name><![CDATA[Gray Locus]]></name>
@@ -18,16 +18,13 @@
     <link href="http://graylocus.github.io/blog/2016/06/04/oh/"/>
     <updated>2016-06-04T01:23:21+08:00</updated>
     <id>http://graylocus.github.io/blog/2016/06/04/oh</id>
-    <content type="html"><![CDATA[<h1>One category</h1>
-
+    <content type="html"><![CDATA[<h1 id="one-category">One category</h1>
 <p>categories: Sass</p>
 
-<h1>Multiple categories example 1</h1>
-
+<h1 id="multiple-categories-example-1">Multiple categories example 1</h1>
 <p>categories: [CSS3, Sass, Media Queries]</p>
 
-<h1>Multiple categories example 2</h1>
-
+<h1 id="multiple-categories-example-2">Multiple categories example 2</h1>
 <p>categories:
 - CSS3
 - Sass
