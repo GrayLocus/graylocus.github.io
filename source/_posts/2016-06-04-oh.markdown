@@ -1,18 +1,12 @@
 ---
 layout: post
-title: "Oh"
+title: "我的第一篇博客"
 date: 2016-06-04 01:23:21 +0800
 comments: true
-categories: 
+categories: "日记"
 ---
-# One category
-categories: Sass
 
-# Multiple categories example 1
-categories: [CSS3, Sass, Media Queries]
+赶在6.3晚上把博客搭好了，6.4日凌晨上线，这是个特殊的日子，仅此只为怀念。
 
-# Multiple categories example 2
-categories:
-- CSS3
-- Sass
-- Media Queries
+GitHub+Octopress的组合真是爽到爆啊，以后要开开心心写blog了。
+
