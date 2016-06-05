@@ -4,7 +4,7 @@
   <title><![CDATA[Gray Locus的小窝]]></title>
   <link href="http://graylocus.github.io/atom.xml" rel="self"/>
   <link href="http://graylocus.github.io/"/>
-  <updated>2016-06-05T18:36:45+08:00</updated>
+  <updated>2016-06-05T18:39:22+08:00</updated>
   <id>http://graylocus.github.io/</id>
   <author>
     <name><![CDATA[Gray Locus]]></name>
@@ -174,8 +174,9 @@
 <p>QuartzCore(CA开头)动画，显示，UIView的后端，以Foundation为基础，继承自NSObject</p>
 
 <h1 id="cocoatouch-uikit">4.CocoaTouch-UIKit</h1>
-<p>贴一个UIKit类结构图：
-<img src="http://graylocus.github.io/images/email.png" /></p>
+<p>贴一个UIKit类结构图：</p>
+
+<p><img src="http://graylocus.github.io/images/blog/object_map.jpg" /></p>
 
 <p>协议：</p>
 
