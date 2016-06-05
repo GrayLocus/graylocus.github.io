@@ -170,7 +170,7 @@ QuartzCore(CA开头)动画，显示，UIView的后端，以Foundation为基础�
 
 #4.CocoaTouch-UIKit
 贴一个UIKit类结构图：
-![Alt text](/source/_posts/images/object_map.jpg)
+![Alt text]({% img /images/blog/object_map.jpg %}) 
 
 协议：
 
