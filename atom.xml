@@ -4,7 +4,7 @@
   <title><![CDATA[Gray Locus的小窝]]></title>
   <link href="http://graylocus.github.io/atom.xml" rel="self"/>
   <link href="http://graylocus.github.io/"/>
-  <updated>2016-06-05T10:50:53+08:00</updated>
+  <updated>2016-06-05T17:46:32+08:00</updated>
   <id>http://graylocus.github.io/</id>
   <author>
     <name><![CDATA[Gray Locus]]></name>
@@ -12,6 +12,154 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[iOS框架梳理]]></title>
+    <link href="http://graylocus.github.io/blog/2016/06/05/iosji-zhu-zong-jie/"/>
+    <updated>2016-06-05T10:52:16+08:00</updated>
+    <id>http://graylocus.github.io/blog/2016/06/05/iosji-zhu-zong-jie</id>
+    <content type="html"><![CDATA[<h1 id="ccobjective-c">1.语言：C/C++/Objective-C</h1>
+<p>##C/C++标准库相关：
+#include &lt;types.h&gt;
+#include &lt;stddef.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;</p>
+
+<h2 id="objective-c">Objective-C相关:</h2>
+<p>位于user/include/objc/目录下
+objc.h
+runtime.h
+objc-api.h
+message.h
+objc-sync.h
+NSObjCRuntime.h</p>
+
+<h2 id="objective-c-1">Objective-C语言概念</h2>
+<p>property
+protocol
+category
+extension
+selector</p>
+
+<p>类与元类(Class &amp; MetaClass)
+内存管理(引用计数，ARC)
+Key-Value编码／Key-Value观察(KVC/KVO)
+Block
+大中枢派发(GCD)
+多线程(@synchronized)
+动态绑定(Dynamic Binding)
+运行时(Runtime)</p>
+
+<h1 id="corefoundation">2.CoreFoundation</h1>
+<p>##Base相关头文件:
+#include &lt;CoreFoundation/CFBase.h&gt;
+#include &lt;CoreFoundation/CFArray.h&gt;
+#include &lt;CoreFoundation/CFBag.h&gt;
+#include &lt;CoreFoundation/CFBinaryHeap.h&gt;
+#include &lt;CoreFoundation/CFBitVector.h&gt;
+#include &lt;CoreFoundation/CFByteOrder.h&gt;
+#include &lt;CoreFoundation/CFCalendar.h&gt;
+#include &lt;CoreFoundation/CFCharacterSet.h&gt;
+#include &lt;CoreFoundation/CFData.h&gt;
+#include &lt;CoreFoundation/CFDate.h&gt;
+#include &lt;CoreFoundation/CFDateFormatter.h&gt;
+#include &lt;CoreFoundation/CFDictionary.h&gt;
+#include &lt;CoreFoundation/CFError.h&gt;
+#include &lt;CoreFoundation/CFLocale.h&gt;
+#include &lt;CoreFoundation/CFNumber.h&gt;
+#include &lt;CoreFoundation/CFNumberFormatter.h&gt;
+#include &lt;CoreFoundation/CFPreferences.h&gt;
+#include &lt;CoreFoundation/CFPropertyList.h&gt;
+#include &lt;CoreFoundation/CFSet.h&gt;
+#include &lt;CoreFoundation/CFString.h&gt;
+#include &lt;CoreFoundation/CFStringEncodingExt.h&gt;
+#include &lt;CoreFoundation/CFTimeZone.h&gt;
+#include &lt;CoreFoundation/CFTree.h&gt;
+#include &lt;CoreFoundation/CFURL.h&gt;
+#include &lt;CoreFoundation/CFURLAccess.h&gt;
+#include &lt;CoreFoundation/CFUUID.h&gt;
+#include &lt;CoreFoundation/CFUtilities.h&gt;</p>
+
+<h2 id="macios">MAC/iOS:</h2>
+<p>#include &lt;CoreFoundation/CFBundle.h&gt;
+#include &lt;CoreFoundation/CFMessagePort.h&gt;
+#include &lt;CoreFoundation/CFPlugIn.h&gt;
+#include &lt;CoreFoundation/CFRunLoop.h&gt;
+#include &lt;CoreFoundation/CFStream.h&gt;
+#include &lt;CoreFoundation/CFSocket.h&gt;</p>
+
+<h1 id="foundation">3.Foundation</h1>
+<p>NSRunloop
+NSThread
+GCD
+NSOperationQueue
+I/O流
+文件系统
+Network</p>
+
+<p>CoreGraphics(CG开头)，图形图像，以CoreFoundation为基础
+CoreText(CT开头)，文本渲染，以CoreGraphics，CoreFoundation为基础
+CFNetwork，以CoreFoundation为基础
+CoreImage，以Foundation为基础
+AVFoundation，以Foundation为基础
+QuartzCore(CA开头)动画，显示，UIView的后端，以Foundation为基础，继承自NSObject</p>
+
+<h1 id="cocoatouch-uikit">4.CocoaTouch-UIKit</h1>
+<p>贴一个UIKit类结构图：
+<img src="http://graylocus.github.io/_posts/images/object_map.jpg" alt="Alt text" /></p>
+
+<p>协议：
+NSObject
+UIStateRestoring
+NSCoding
+NSCopying</p>
+
+<p>KVC/KVO:
+(参考NSKeyValueCoding.h,NSSKeyValueObserving.h)</p>
+
+<p>NSKeyValueCoding category
+- (id)valueForKey:(NSString *)key;
+- (void)setValue:(nullable id)value forKey:(NSString *)key;</p>
+
+<p>NSSKeyValueObserving：
+- (void)observeValueForKeyPath:(nullable NSString <em>)keyPath ofObject:(nullable id)object change:(nullable NSDictionary&lt;NSString</em>, id&gt; *)change context:(nullable void *)context;
+- (void)addObserver:(NSObject *)observer forKeyPath:(NSString *)keyPath options:(NSKeyValueObservingOptions)options context:(nullable void *)context;
+- (void)removeObserver:(NSObject *)observer forKeyPath:(NSString *)keyPath context:(nullable void *)context NS_AVAILABLE(10_7, 5_0);
+- (void)removeObserver:(NSObject *)observer forKeyPath:(NSString *)keyPath;</p>
+
+<h1 id="tips">Tips</h1>
+<blockquote>
+  <h3 id="nilnilnullnullnsnull">nil/Nil/null/NULL/NSNull的比较</h3>
+  <p>1.nil 空的NSObject实例对象 
+#define nil __DARWIN_NULL
+#define __DARWIN_NULL ((void *)0)</p>
+</blockquote>
+
+<blockquote>
+  <p>2.Nil 空的NSObject类对象
+define Nil __DARWIN_NULL</p>
+</blockquote>
+
+<blockquote>
+  <p>3.null/NULL
+#define NULL ((void*)0)  指向0地址的指针</p>
+</blockquote>
+
+<blockquote>
+  <p>4.NSNull 
+一个代表空值的NSObject类，常用于集合中的占位对象</p>
+</blockquote>
+
+<blockquote>
+  <p>结论：
+(1)1nil=Nil=Null=NULL=(void *)0
+(2)[nil message]返回NO，无异常抛出
+(3)[NSNull message]抛出异常NSException</p>
+</blockquote>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[我的第一篇博客]]></title>
