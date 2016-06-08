@@ -4,7 +4,7 @@
   <title><![CDATA[Gray Locus的小窝]]></title>
   <link href="http://graylocus.github.io/atom.xml" rel="self"/>
   <link href="http://graylocus.github.io/"/>
-  <updated>2016-06-09T00:18:51+08:00</updated>
+  <updated>2016-06-09T00:32:43+08:00</updated>
   <id>http://graylocus.github.io/</id>
   <author>
     <name><![CDATA[Gray Locus]]></name>
@@ -158,157 +158,173 @@ Runloop的执行流程</p>
     <content type="html"><![CDATA[<h1 id="section">1.语言</h1>
 
 <h2 id="cc">C/C++标准库相关：</h2>
-<p>#include &lt;types.h&gt;</p>
+<blockquote>
+  <p>#include &lt;types.h&gt;</p>
 
-<p>#include &lt;stddef.h&gt;</p>
+  <p>#include &lt;stddef.h&gt;</p>
 
-<p>#include &lt;stdio.h&gt;</p>
+  <p>#include &lt;stdio.h&gt;</p>
 
-<p>#include &lt;stdlib.h&gt;</p>
+  <p>#include &lt;stdlib.h&gt;</p>
 
-<p>#include &lt;string.h&gt;</p>
+  <p>#include &lt;string.h&gt;</p>
+</blockquote>
 
 <h2 id="objective-c">Objective-C相关:</h2>
 <p>位于user/include/objc/目录下</p>
 
-<p>objc.h</p>
+<blockquote>
+  <p>objc.h</p>
 
-<p>runtime.h</p>
+  <p>runtime.h</p>
 
-<p>objc-api.h</p>
+  <p>objc-api.h</p>
 
-<p>message.h</p>
+  <p>message.h</p>
 
-<p>objc-sync.h</p>
+  <p>objc-sync.h</p>
 
-<p>NSObjCRuntime.h</p>
+  <p>NSObjCRuntime.h</p>
+</blockquote>
 
 <h2 id="objective-c-1">Objective-C语言概念</h2>
-<p>property</p>
+<blockquote>
+  <p>property</p>
 
-<p>protocol</p>
+  <p>protocol</p>
 
-<p>category</p>
+  <p>category</p>
 
-<p>extension</p>
+  <p>extension</p>
 
-<p>selector</p>
+  <p>selector</p>
+</blockquote>
 
-<p>类与元类(Class &amp; MetaClass)</p>
+<blockquote>
+  <p>类与元类(Class &amp; MetaClass)</p>
 
-<p>内存管理(引用计数，ARC)</p>
+  <p>内存管理(引用计数，ARC)</p>
 
-<p>Key-Value编码／Key-Value观察(KVC/KVO)</p>
+  <p>Key-Value编码／Key-Value观察(KVC/KVO)</p>
 
-<p>Block</p>
+  <p>Block</p>
 
-<p>大中枢派发(GCD)</p>
+  <p>大中枢派发(GCD)</p>
 
-<p>多线程(@synchronized)</p>
+  <p>多线程(@synchronized)</p>
 
-<p>动态绑定(Dynamic Binding)</p>
+  <p>动态绑定(Dynamic Binding)</p>
 
-<p>运行时(Runtime)</p>
+  <p>运行时(Runtime)</p>
+</blockquote>
 
 <h1 id="corefoundation">2.CoreFoundation</h1>
 
 <h2 id="base">Base相关头文件:</h2>
 
-<p>#include &lt;CoreFoundation/CFBase.h&gt;</p>
+<blockquote>
+  <p>#include &lt;CoreFoundation/CFBase.h&gt;</p>
 
-<p>#include &lt;CoreFoundation/CFArray.h&gt;</p>
+  <p>#include &lt;CoreFoundation/CFArray.h&gt;</p>
 
-<p>#include &lt;CoreFoundation/CFBag.h&gt;</p>
+  <p>#include &lt;CoreFoundation/CFBag.h&gt;</p>
 
-<p>#include &lt;CoreFoundation/CFBinaryHeap.h&gt;</p>
+  <p>#include &lt;CoreFoundation/CFBinaryHeap.h&gt;</p>
 
-<p>#include &lt;CoreFoundation/CFBitVector.h&gt;</p>
+  <p>#include &lt;CoreFoundation/CFBitVector.h&gt;</p>
 
-<p>#include &lt;CoreFoundation/CFByteOrder.h&gt;</p>
+  <p>#include &lt;CoreFoundation/CFByteOrder.h&gt;</p>
 
-<p>#include &lt;CoreFoundation/CFCalendar.h&gt;</p>
+  <p>#include &lt;CoreFoundation/CFCalendar.h&gt;</p>
 
-<p>#include &lt;CoreFoundation/CFCharacterSet.h&gt;</p>
+  <p>#include &lt;CoreFoundation/CFCharacterSet.h&gt;</p>
 
-<p>#include &lt;CoreFoundation/CFData.h&gt;</p>
+  <p>#include &lt;CoreFoundation/CFData.h&gt;</p>
 
-<p>#include &lt;CoreFoundation/CFDate.h&gt;</p>
+  <p>#include &lt;CoreFoundation/CFDate.h&gt;</p>
 
-<p>#include &lt;CoreFoundation/CFDateFormatter.h&gt;</p>
+  <p>#include &lt;CoreFoundation/CFDateFormatter.h&gt;</p>
 
-<p>#include &lt;CoreFoundation/CFDictionary.h&gt;</p>
+  <p>#include &lt;CoreFoundation/CFDictionary.h&gt;</p>
 
-<p>#include &lt;CoreFoundation/CFError.h&gt;</p>
+  <p>#include &lt;CoreFoundation/CFError.h&gt;</p>
 
-<p>#include &lt;CoreFoundation/CFLocale.h&gt;</p>
+  <p>#include &lt;CoreFoundation/CFLocale.h&gt;</p>
 
-<p>#include &lt;CoreFoundation/CFNumber.h&gt;</p>
+  <p>#include &lt;CoreFoundation/CFNumber.h&gt;</p>
 
-<p>#include &lt;CoreFoundation/CFNumberFormatter.h&gt;</p>
+  <p>#include &lt;CoreFoundation/CFNumberFormatter.h&gt;</p>
 
-<p>#include &lt;CoreFoundation/CFPreferences.h&gt;</p>
+  <p>#include &lt;CoreFoundation/CFPreferences.h&gt;</p>
 
-<p>#include &lt;CoreFoundation/CFPropertyList.h&gt;</p>
+  <p>#include &lt;CoreFoundation/CFPropertyList.h&gt;</p>
 
-<p>#include &lt;CoreFoundation/CFSet.h&gt;</p>
+  <p>#include &lt;CoreFoundation/CFSet.h&gt;</p>
 
-<p>#include &lt;CoreFoundation/CFString.h&gt;</p>
+  <p>#include &lt;CoreFoundation/CFString.h&gt;</p>
 
-<p>#include &lt;CoreFoundation/CFStringEncodingExt.h&gt;</p>
+  <p>#include &lt;CoreFoundation/&gt;CFStringEncodingExt.h&gt;</p>
 
-<p>#include &lt;CoreFoundation/CFTimeZone.h&gt;</p>
+  <p>#include &lt;CoreFoundation/CFTimeZone.h&gt;</p>
 
-<p>#include &lt;CoreFoundation/CFTree.h&gt;</p>
+  <p>#include &lt;CoreFoundation/CFTree.h&gt;</p>
 
-<p>#include &lt;CoreFoundation/CFURL.h&gt;</p>
+  <p>#include &lt;CoreFoundation/CFURL.h&gt;</p>
 
-<p>#include &lt;CoreFoundation/CFURLAccess.h&gt;</p>
+  <p>#include &lt;CoreFoundation/CFURLAccess.h&gt;</p>
 
-<p>#include &lt;CoreFoundation/CFUUID.h&gt;</p>
+  <p>#include &lt;CoreFoundation/CFUUID.h&gt;</p>
 
-<p>#include &lt;CoreFoundation/CFUtilities.h&gt;</p>
+  <p>#include &lt;CoreFoundation/CFUtilities.h&gt;</p>
+</blockquote>
 
 <h2 id="macios">MAC/iOS:</h2>
 
-<p>#include &lt;CoreFoundation/CFBundle.h&gt;</p>
+<blockquote>
+  <p>#include &lt;CoreFoundation/CFBundle.h&gt;</p>
 
-<p>#include &lt;CoreFoundation/CFMessagePort.h&gt;</p>
+  <p>#include &lt;CoreFoundation/CFMessagePort.h&gt;</p>
 
-<p>#include &lt;CoreFoundation/CFPlugIn.h&gt;</p>
+  <p>#include &lt;CoreFoundation/CFPlugIn.h&gt;</p>
 
-<p>#include &lt;CoreFoundation/CFRunLoop.h&gt;</p>
+  <p>#include &lt;CoreFoundation/CFRunLoop.h&gt;</p>
 
-<p>#include &lt;CoreFoundation/CFStream.h&gt;</p>
+  <p>#include &lt;CoreFoundation/CFStream.h&gt;</p>
 
-<p>#include &lt;CoreFoundation/CFSocket.h&gt;</p>
+  <p>#include &lt;CoreFoundation/CFSocket.h&gt;</p>
+</blockquote>
 
 <h1 id="foundation">3.Foundation</h1>
 
-<p>NSRunloop</p>
+<blockquote>
+  <p>NSRunloop</p>
 
-<p>NSThread</p>
+  <p>NSThread</p>
 
-<p>GCD</p>
+  <p>GCD</p>
 
-<p>NSOperationQueue</p>
+  <p>NSOperationQueue</p>
 
-<p>I/O流</p>
+  <p>I/O流</p>
 
-<p>文件系统</p>
+  <p>文件系统</p>
 
-<p>Network</p>
+  <p>Network</p>
+</blockquote>
 
-<p>CoreGraphics(CG开头)，图形图像，以CoreFoundation为基础</p>
+<blockquote>
+  <p>CoreGraphics(CG开头)，图形图像，以CoreFoundation为基础</p>
 
-<p>CoreText(CT开头)，文本渲染，以CoreGraphics，CoreFoundation为基础</p>
+  <p>CoreText(CT开头)，文本渲染，以CoreGraphics，CoreFoundation为基础</p>
 
-<p>CFNetwork，以CoreFoundation为基础</p>
+  <p>CFNetwork，以CoreFoundation为基础</p>
 
-<p>CoreImage，以Foundation为基础</p>
+  <p>CoreImage，以Foundation为基础</p>
 
-<p>AVFoundation，以Foundation为基础</p>
+  <p>AVFoundation，以Foundation为基础</p>
 
-<p>QuartzCore(CA开头)动画，显示，UIView的后端，以Foundation为基础，继承自NSObject</p>
+  <p>QuartzCore(CA开头)动画，显示，UIView的后端，以Foundation为基础，继承自NSObject</p>
+</blockquote>
 
 <h1 id="cocoatouch-uikit">4.CocoaTouch-UIKit</h1>
 <p>贴一个UIKit类结构图：</p>
@@ -317,44 +333,35 @@ Runloop的执行流程</p>
 
 <p>协议：</p>
 
-<p>NSObject</p>
+<blockquote>
+  <p>NSObject</p>
 
-<p>UIStateRestoring</p>
+  <p>UIStateRestoring</p>
 
-<p>NSCoding</p>
+  <p>NSCoding</p>
 
-<p>NSCopying</p>
+  <p>NSCopying</p>
+</blockquote>
 
-<p>KVC/KVO:
-(参考NSKeyValueCoding.h,NSSKeyValueObserving.h)</p>
+<blockquote>
+  <p>KVC/KVO:(参考NSKeyValueCoding.h,NSSKeyValueObserving.h)</p>
 
-<p>NSKeyValueCoding category</p>
+  <p>NSKeyValueCoding category</p>
 
-<ul>
-  <li>
-    <p>(id)valueForKey:(NSString *)key;</p>
-  </li>
-  <li>
-    <p>(void)setValue:(nullable id)value forKey:(NSString *)key;</p>
-  </li>
-</ul>
+  <ul>
+    <li>(id)valueForKey:(NSString *)key;</li>
+    <li>(void)setValue:(nullable id)value forKey:(NSString *)key;</li>
+  </ul>
 
-<p>NSSKeyValueObserving：</p>
+  <p>NSSKeyValueObserving：</p>
 
-<ul>
-  <li>
-    <p>(void)observeValueForKeyPath:(nullable\ NSString *)keyPath ofObject:(nullable id)object change:(nullable NSDictionary&lt;NSString*, id&gt; *)change context:(nullable void *)context;</p>
-  </li>
-  <li>
-    <p>(void)addObserver:(NSObject *)observer forKeyPath:(NSString *)keyPath options:(NSKeyValueObservingOptions)options context:(nullable void *)context;</p>
-  </li>
-  <li>
-    <p>(void)removeObserver:(NSObject *)observer forKeyPath:(NSString *)keyPath context:(nullable void *)context NS_AVAILABLE(10_7, 5_0);</p>
-  </li>
-  <li>
-    <p>(void)removeObserver:(NSObject *)observer forKeyPath:(NSString *)keyPath;</p>
-  </li>
-</ul>
+  <ul>
+    <li>(void)observeValueForKeyPath:(nullable NSString *)keyPath ofObject:(nullable id)object change:(nullable NSDictionary&lt;NSString*, id&gt; *)change context:(nullable void *)context;</li>
+    <li>(void)addObserver:(NSObject *)observer forKeyPath:(NSString *)keyPath options:(NSKeyValueObservingOptions)options context:(nullable void *)context;</li>
+    <li>(void)removeObserver:(NSObject *)observer forKeyPath:(NSString *)keyPath context:(nullable void *)context NS_AVAILABLE(10_7, 5_0);</li>
+    <li>(void)removeObserver:(NSObject *)observer forKeyPath:(NSString *)keyPath;</li>
+  </ul>
+</blockquote>
 
 <h1 id="tips">Tips</h1>
 <blockquote>
@@ -362,24 +369,16 @@ Runloop的执行流程</p>
   <p>1.nil 空的NSObject实例对象 
 #define nil __DARWIN_NULL
 #define __DARWIN_NULL ((void *)0)</p>
-</blockquote>
 
-<blockquote>
   <p>2.Nil 空的NSObject类对象
 define Nil __DARWIN_NULL</p>
-</blockquote>
 
-<blockquote>
   <p>3.null/NULL
 #define NULL ((void*)0)  指向0地址的指针</p>
-</blockquote>
 
-<blockquote>
   <p>4.NSNull 
 一个代表空值的NSObject类，常用于集合中的占位对象</p>
-</blockquote>
 
-<blockquote>
   <p>结论：
 (1)1nil=Nil=Null=NULL=(void *)0
 (2)[nil message]返回NO，无异常抛出
