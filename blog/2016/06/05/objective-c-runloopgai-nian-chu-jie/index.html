@@ -81,8 +81,9 @@
 				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 	<h1 class="title" itemprop="name">Objective-C Runloop概念初解</h1>
 	<div class="entry-content" itemprop="articleBody"><blockquote>
-  <p>A run loop is an event processing loop that you use to schedule work and coordinate the receipt of incoming events. The purpose of a run loop is to keep your thread busy when there is work to do and put your thread to sleep when there is none.
-Runloop是线程相关的基础框架，用来调度工作，协调到来的事件和接收者之间的关系。它的主要目的是在有工作要做时将线程置于busy状态，在无工作要做时将线程置于sleep状态。</p>
+  <p>A run loop is an event processing loop that you use to schedule work and coordinate the receipt of incoming events. The purpose of a run loop is to keep your thread busy when there is work to do and put your thread to sleep when there is none.</p>
+
+  <p>Runloop是线程相关的基础框架，用来调度工作，协调到来的事件和接收者之间的关系。它的主要目的是在有工作要做时将线程置于busy状态，在无工作要做时将线程置于sleep状态。</p>
 </blockquote>
 
 <p>Runlop的管理不完全是自动化的，你需要设计你的代码在正确的时间启动Runloop，响应到来的事件。Cocoa和CoreFoundation都提供了Runloop相关的对象帮助你来配置和管理线程Runloop。</p>
@@ -112,22 +113,24 @@ TimerSource传递同步事件，发生在一个确定的时间或者是以一定
 
 <p>Runloop不同的mode：</p>
 
-<p>1.<strong><em>default</em></strong>，NSDefaultRunloopMode，用于大多数操作，通常情况下，你应该是用这种mode启动runloop，配置input source。</p>
+<blockquote>
+  <p>1.<strong><em>default</em></strong>，NSDefaultRunloopMode，用于大多数操作，通常情况下，你应该是用这种mode启动runloop，配置input source。</p>
 
-<p>2.<strong><em>connection</em></strong>，NSConnectionReplyMode，Cocoa使用这种mode和NSConnection来协同监听响应，该模式很少用</p>
+  <p>2.<strong><em>connection</em></strong>，NSConnectionReplyMode，Cocoa使用这种mode和NSConnection来协同监听响应，该模式很少用</p>
 
-<p>3.<strong><em>modal</em></strong>，NSModalPanelRunLoopMode，</p>
+  <p>3.<strong><em>modal</em></strong>，NSModalPanelRunLoopMode，</p>
 
-<p>4.<strong><em>event tracking</em></strong>，NSEventTrackingRunLoopMode，在鼠标拖动和其他类似的UI跟踪情况下会进入这种模式，该模式会限制其他到来的事件。</p>
+  <p>4.<strong><em>event tracking</em></strong>，NSEventTrackingRunLoopMode，在鼠标拖动和其他类似的UI跟踪情况下会进入这种模式，该模式会限制其他到来的事件。</p>
 
-<p>5.<strong><em>common modes</em></strong>，NSRunLoopCommonModes，(不是一个具体的mode，是一类mode的统称，具有特殊的作用，对Cocoa应用来说，common modes默认包含default/modal/event tracking这几种modes)</p>
+  <p>5.<strong><em>common modes</em></strong>，NSRunLoopCommonModes，不是一个具体的mode，是一类mode的统称，具有特殊的作用，对Cocoa应用来说，common modes默认包含default/modal/event tracking这几种modes</p>
+</blockquote>
 
 <h1 id="input-source">3.Input Source</h1>
 <p>Input Source有两类，基于<strong>Port</strong>的InputSource和<strong>自定义</strong>的InputSource，基于Port的Source会监听应用程序的Mach Ports，自定义的Source用来监听自定义的Source事件。
 这两类Source的唯一区别是它们的触发方式不同，基于Port的Source是由内核自动触发，而自定义的Source一定要由另外一个线程手动触发。</p>
 
 <h1 id="timer-source">4.Timer Source</h1>
-<p>Timer Source用来在一个预设置的时间点产生同步事件，实际上，Timer机制并不是一个实时机制，Timer是有一个Tolerance的，即允许一定的时间误差，Runloop每秒会flush整个Runloop中的消息队列／block多次，每次都会检查注册的Timer是否触发，如果触发，则执行该Timer注册的处理函数。</p>
+<p>Timer Source用来在一个预设置的时间点产生同步事件，实际上，Timer机制并不是一个实时机制，Timer是有一个Tolerance的，即允许一定的时间误差，Runloop每秒会flush整个Runloop中的消息队列多次，每次都会检查注册的Timer是否触发，如果触发，则执行该Timer注册的处理函数。</p>
 
 <p>注册到Runloop的Timer都是与特定的Runloop Mode绑定的，如果当前Runloop的Mode与Timer注册的Mode不一致，这个Timer的定时处理函数将不会被执行。</p>
 
@@ -137,34 +140,52 @@ TimerSource传递同步事件，发生在一个确定的时间或者是以一定
 <p>Runloop有以下几个时机可以被observe：</p>
 
 <blockquote>
-  <p>1.The entrance to the run loop.
-2.When the run loop is about to process a timer.
-3.When the run loop is about to process an input source.
-4.When the run loop is about to go to sleep.
-5.When the run loop has woken up, but before it has processed the event that woke it up.
-6.The exit from the run loop.</p>
+  <p>1.The entrance to the run loop.</p>
+
+  <p>2.When the run loop is about to process a timer.</p>
+
+  <p>3.When the run loop is about to process an input source.</p>
+
+  <p>4.When the run loop is about to go to sleep.</p>
+
+  <p>5.When the run loop has woken up, but before it has processed the event that woke it up.</p>
+
+  <p>6.The exit from the run loop.</p>
 </blockquote>
 
 <h1 id="runloop-1">6.Runloop执行序列</h1>
 <blockquote>
+  <p>1.Notify observers that the run loop has been entered.</p>
 
-  <p>1.Notify observers that the run loop has been entered.
-2.Notify observers that any ready timers are about to fire.
-3.Notify observers that any input sources that are not port based are about to fire.
-4.Fire any non-port-based input sources that are ready to fire.
-5.If a port-based input source is ready and waiting to fire, process the event immediately. Go to step 9.
-6.Notify observers that the thread is about to sleep.
-7.Put the thread to sleep until one of the following events occurs:
-- An event arrives for a port-based input source.
-- A timer fires.
-- The timeout value set for the run loop expires.
-- The run loop is explicitly woken up.
-8.Notify observers that the thread just woke up.
-9.Process the pending event.
-- If a user-defined timer fired, process the timer event and restart the loop. Go to step 2.
-- If an input source fired, deliver the event.
-- If the run loop was explicitly woken up but has not yet timed out, restart the loop. Go to step 2.
-10.Notify observers that the run loop has exited.</p>
+  <p>2.Notify observers that any ready timers are about to fire.</p>
+
+  <p>3.Notify observers that any input sources that are not port based are about to fire.</p>
+
+  <p>4.Fire any non-port-based input sources that are ready to fire.</p>
+
+  <p>5.If a port-based input source is ready and waiting to fire, process the event immediately. Go to step 9.</p>
+
+  <p>6.Notify observers that the thread is about to sleep.</p>
+
+  <p>7.Put the thread to sleep until one of the following events occurs:</p>
+
+  <ul>
+    <li>An event arrives for a port-based input source.</li>
+    <li>A timer fires.</li>
+    <li>The timeout value set for the run loop expires.</li>
+    <li>The run loop is explicitly woken up.</li>
+  </ul>
+
+  <p>8.Notify observers that the thread just woke up.</p>
+
+  <p>9.Process the pending event.</p>
+
+  <ul>
+    <li>If a user-defined timer fired, process the timer event and restart the loop. Go to step 2.</li>
+    <li>If an input source fired, deliver the event.</li>
+    <li>If the run loop was explicitly woken up but has not yet timed out, restart the loop. Go to step 2.
+10.Notify observers that the run loop has exited.</li>
+  </ul>
 </blockquote>
 
 <h1 id="section">问题：</h1>
@@ -172,10 +193,13 @@ TimerSource传递同步事件，发生在一个确定的时间或者是以一定
 The run method of UIApplication in iOS (or NSApplication in OS X) starts an application’s main loop as part of the normal startup sequence.</p>
 
 <blockquote>
-  <p>1.Use ports or custom input sources to communicate with other threads.
-2.Use timers on the thread.
-3.Use any of the performSelector… methods in a Cocoa application.
-4.Keep the thread around to perform periodic tasks.</p>
+  <p>1.Use ports or custom input sources to communicate with other threads.</p>
+
+  <p>2.Use timers on the thread.</p>
+
+  <p>3.Use any of the performSelector… methods in a Cocoa application.</p>
+
+  <p>4.Keep the thread around to perform periodic tasks.</p>
 </blockquote>
 
 <p>Runloop的mode item
