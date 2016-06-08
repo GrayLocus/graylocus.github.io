@@ -4,7 +4,7 @@
   <title><![CDATA[Gray Locus的小窝]]></title>
   <link href="http://graylocus.github.io/atom.xml" rel="self"/>
   <link href="http://graylocus.github.io/"/>
-  <updated>2016-06-05T18:39:22+08:00</updated>
+  <updated>2016-06-08T09:36:08+08:00</updated>
   <id>http://graylocus.github.io/</id>
   <author>
     <name><![CDATA[Gray Locus]]></name>
@@ -12,6 +12,113 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Objective-C Runloop概念初解]]></title>
+    <link href="http://graylocus.github.io/blog/2016/06/05/objective-c-runloopgai-nian-chu-jie/"/>
+    <updated>2016-06-05T18:51:43+08:00</updated>
+    <id>http://graylocus.github.io/blog/2016/06/05/objective-c-runloopgai-nian-chu-jie</id>
+    <content type="html"><![CDATA[<blockquote>
+  <p>A run loop is an event processing loop that you use to schedule work and coordinate the receipt of incoming events. The purpose of a run loop is to keep your thread busy when there is work to do and put your thread to sleep when there is none.
+Runloop是线程相关的基础框架，用来调度工作，协调到来的事件和接收者之间的关系。它的主要目的是在有工作要做时将线程置于busy状态，在无工作要做时将线程置于sleep状态。</p>
+</blockquote>
+
+<p>Runlop的管理不完全是自动化的，你需要设计你的代码在正确的时间启动Runloop，响应到来的事件。Cocoa和CoreFoundation都提供了runloop相关的对象帮助你来配置和管理线程runloop。</p>
+
+<p>App主线程在创建时已经绑定了runloop对象并且已经启动，但是子线程需要手动启动runloop。</p>
+
+<p>下面几个小节提供了关于如何配置runloop的信息。</p>
+
+<h1 id="runloop">1.Runloop初窥</h1>
+<p>Runloop顾名思义就是一个循环，在这个循环里线程执行各种到来事件的响应处理函数。
+Runloop接收两种来自不同类型的source的事件，InputSource和TimerSource。
+InputSource会传递异步事件，通常是来自另一个线程或者不同App的消息。
+TimerSource传递同步事件，发生在一个确定的时间或者是以一定的时间间隔重复性的发生。
+这两种类型的source都是用application-specific handler来处理到来的事件。
+<img src="https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/Multithreading/Art/runloop.jpg" /></p>
+
+<p>为了处理InputSource，Runloop也会产生关于它自身的一些行为的通知，注册Runloop observer会接收到这些通知，可以利用这些通知处理函数做些额外的工作。</p>
+
+<h1 id="runloop-modes">2.Runloop Modes</h1>
+<p>Runloop是由一组被监听的InputSource和Timer和一组被通知的RunloopObserver组成的。
+<strong><em>(S.O.T组合)</em></strong></p>
+
+<p>Runloop有几种不同的模式(mode)，可以手动指定Runloop运行在哪种mode下，在某个具体的mode下，只有和该mode相关的source才会被监听，才被允许传递事件。同样地，只有mode相关的observer才会被通知Runloop的进度改变。
+而那些和其他modes绑定的source则会被挂起，直到Runloop切换到适当的mode。
+<strong><em>(Mode的概念相当重要)</em></strong></p>
+
+<p>Runloop不同的mode：
+1.<strong><em>default</em></strong>，NSDefaultRunloopMode，用于大多数操作，通常情况下，你应该是用这种mode启动runloop，配置input source。</p>
+
+<p>2.<strong><em>connection</em></strong>，NSConnectionReplyMode，Cocoa使用这种mode和NSConnection来协同监听响应，该模式很少用</p>
+
+<p>3.<strong><em>modal</em></strong>，NSModalPanelRunLoopMode，</p>
+
+<p>4.<strong><em>event tracking</em></strong>，NSEventTrackingRunLoopMode，在鼠标拖动和其他类似的UI跟踪情况下会进入这种模式，该模式会限制其他到来的事件。</p>
+
+<p>5.<strong><em>common modes</em></strong>，NSRunLoopCommonModes，(不是一个具体的mode，是一类mode的统称，具有特殊的作用，对Cocoa应用来说，common modes默认包含default/modal/event tracking这几种modes)</p>
+
+<h1 id="input-source">3.Input Source</h1>
+<p>Input Source有两类，基于<strong>Port</strong>的InputSource和<strong>自定义</strong>的InputSource，基于Port的Source会监听应用程序的Mach Ports，自定义的Source用来监听自定义的Source事件。
+这两类Source的唯一区别是它们的触发方式不同，基于Port的Source是由内核自动触发，而自定义的Source一定要由另外一个线程手动触发。</p>
+
+<p>Timer Source</p>
+
+<h1 id="runloop-observer">4.Runloop Observer</h1>
+<p>Runloop除了处理input source外，还会生成各种关于Runloop行为的通知，这可以在Runloop循环内的不同时机做些额外的处理工作，Core Foundation提供了相应的API以用来注册接收这些通知。</p>
+
+<p>Runloop有以下几个时机可以被observe：</p>
+
+<blockquote>
+  <p>1.The entrance to the run loop.
+2.When the run loop is about to process a timer.
+3.When the run loop is about to process an input source.
+4.When the run loop is about to go to sleep.
+5.When the run loop has woken up, but before it has processed the event that woke it up.
+6.The exit from the run loop.</p>
+</blockquote>
+
+<h1 id="runloop-1">5.Runloop执行序列</h1>
+<blockquote>
+
+  <p>1.Notify observers that the run loop has been entered.
+2.Notify observers that any ready timers are about to fire.
+3.Notify observers that any input sources that are not port based are about to fire.
+4.Fire any non-port-based input sources that are ready to fire.
+5.If a port-based input source is ready and waiting to fire, process the event immediately. Go to step 9.
+6.Notify observers that the thread is about to sleep.
+7.Put the thread to sleep until one of the following events occurs:
+An event arrives for a port-based input source.
+A timer fires.
+The timeout value set for the run loop expires.
+The run loop is explicitly woken up.
+8.Notify observers that the thread just woke up.
+9.Process the pending event.
+If a user-defined timer fired, process the timer event and restart the loop. Go to step 2.
+If an input source fired, deliver the event.
+If the run loop was explicitly woken up but has not yet timed out, restart the loop. Go to step 2.
+10.Notify observers that the run loop has exited.
+#问题：
+何时会用到Runloop？
+The run method of UIApplication in iOS (or NSApplication in OS X) starts an application’s main loop as part of the normal startup sequence.</p>
+</blockquote>
+
+<blockquote>
+  <p>1.Use ports or custom input sources to communicate with other threads.
+2.Use timers on the thread.
+3.Use any of the performSelector… methods in a Cocoa application.
+4.Keep the thread around to perform periodic tasks.</p>
+</blockquote>
+
+<p>Runloop的mode item
+Input Sources(Source0, source1), Timer Source 和 Observer
+Runloop的服务对象就是这些mode item
+Runloop的执行流程</p>
+
+<p>参考：<a href="https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/Multithreading/RunLoopManagement/RunLoopManagement.html#//apple_ref/doc/uid/10000057i-CH16-SW1">Apple Runloop 官方文档</a></p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[iOS框架梳理]]></title>
@@ -206,7 +313,7 @@
 
 <ul>
   <li>
-    <p>(void)observeValueForKeyPath:(nullable NSString <em>)keyPath ofObject:(nullable id)object change:(nullable NSDictionary&lt;NSString</em>, id&gt; *)change context:(nullable void *)context;</p>
+    <p>(void)observeValueForKeyPath:(nullable\ NSString *)keyPath ofObject:(nullable id)object change:(nullable NSDictionary&lt;NSString*, id&gt; *)change context:(nullable void *)context;</p>
   </li>
   <li>
     <p>(void)addObserver:(NSObject *)observer forKeyPath:(NSString *)keyPath options:(NSKeyValueObservingOptions)options context:(nullable void *)context;</p>
