@@ -3,11 +3,11 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Runloop概念初解 - Gray Locus的小窝</title>
+	<title>Runloop 概念初解 - Gray Locus的小窝</title>
 	<meta name="author" content="Gray Locus">
 
 	
-	<meta name="description" content="Runloop概念初解 A run loop is an event processing loop that you use to schedule work and coordinate the receipt of incoming events. The purpose of a run &hellip;">
+	<meta name="description" content="Runloop 概念初解 A run loop is an event processing loop that you use to schedule work and coordinate the receipt of incoming events. The purpose of a &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,14 +79,15 @@
 			
 			<div class="mid-col-container">
 				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
-	<h1 class="title" itemprop="name">Runloop概念初解</h1>
+	<h1 class="title" itemprop="name">Runloop 概念初解</h1>
 	<div class="entry-content" itemprop="articleBody"><blockquote>
   <p>A run loop is an event processing loop that you use to schedule work and coordinate the receipt of incoming events. The purpose of a run loop is to keep your thread busy when there is work to do and put your thread to sleep when there is none.</p>
 
-  <p>Runloop是线程相关的基础框架，用来调度工作，协调到来的事件和接收者之间的关系。它的主要目的是在有工作要做时将线程置于busy状态，在无工作要做时将线程置于sleep状态。</p>
+  <p>Runloop是线程相关的基础框架，用来调度工作，协调到来的事件和接收者之间的关系。它的主要目的是在有工作要做时将线程置于busy状态，在无工作要做时将线程置于sleep状态。
+(打个比喻：RunLoop就像一个发动机引擎，负责把各类型的事件和任务分发给需要的对象，并执行相应的处理函数)
+<!--more-->
+Runlop的管理不完全是自动化的，你需要设计你的代码在正确的时间启动Runloop，响应到来的事件。Cocoa和CoreFoundation都提供了Runloop相关的对象帮助你来配置和管理线程Runloop。</p>
 </blockquote>
-
-<p>Runlop的管理不完全是自动化的，你需要设计你的代码在正确的时间启动Runloop，响应到来的事件。Cocoa和CoreFoundation都提供了Runloop相关的对象帮助你来配置和管理线程Runloop。</p>
 
 <p>App主线程在创建时已经绑定了runloop对象并且已经启动，但是子线程需要手动启动runloop。</p>
 
@@ -111,19 +112,16 @@ TimerSource传递同步事件，发生在一个确定的时间或者是以一定
 而那些和其他modes绑定的source则会被挂起，直到Runloop切换到适当的mode。
 <strong><em>(Mode的概念相当重要)</em></strong></p>
 
-<p>Runloop不同的mode：</p>
-
-<blockquote>
-  <p>1.<strong><em>default</em></strong>，NSDefaultRunloopMode，用于大多数操作，通常情况下，你应该是用这种mode启动runloop，配置input source。</p>
-
-  <p>2.<strong><em>connection</em></strong>，NSConnectionReplyMode，Cocoa使用这种mode和NSConnection来协同监听响应，该模式很少用</p>
-
-  <p>3.<strong><em>modal</em></strong>，NSModalPanelRunLoopMode，</p>
-
-  <p>4.<strong><em>event tracking</em></strong>，NSEventTrackingRunLoopMode，在鼠标拖动和其他类似的UI跟踪情况下会进入这种模式，该模式会限制其他到来的事件。</p>
-
-  <p>5.<strong><em>common modes</em></strong>，NSRunLoopCommonModes，不是一个具体的mode，是一类mode的统称，具有特殊的作用，对Cocoa应用来说，common modes默认包含default/modal/event tracking这几种modes</p>
-</blockquote>
+<p>Runloop不同的mode：
+&gt;1.<strong><em>default</em></strong>，NSDefaultRunloopMode，用于大多数操作，通常情况下，你应该是用这种mode启动runloop，配置input source。
+&gt;
+&gt;2.<strong><em>connection</em></strong>，NSConnectionReplyMode，Cocoa使用这种mode和NSConnection来协同监听响应，该模式很少用
+&gt;
+&gt;3.<strong><em>modal</em></strong>，NSModalPanelRunLoopMode，
+&gt;
+&gt;4.<strong><em>event tracking</em></strong>，NSEventTrackingRunLoopMode，在鼠标拖动和其他类似的UI跟踪情况下会进入这种模式，该模式会限制其他到来的事件。
+&gt;
+&gt;5.<strong><em>common modes</em></strong>，NSRunLoopCommonModes，不是一个具体的mode，是一类mode的统称，具有特殊的作用，对Cocoa应用来说，common modes默认包含default/modal/event tracking这几种modes</p>
 
 <h1 id="input-source">3.Input Source</h1>
 <p>Input Source有两类，基于<strong>Port</strong>的InputSource和<strong>自定义</strong>的InputSource，基于Port的Source会监听应用程序的Mach Ports，自定义的Source用来监听自定义的Source事件。

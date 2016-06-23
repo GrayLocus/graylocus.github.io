@@ -1,24 +1,87 @@
-<?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Gray Locus的小窝]]></title>
-  <link href="http://graylocus.github.io/atom.xml" rel="self"/>
-  <link href="http://graylocus.github.io/"/>
-  <updated>2016-06-23T23:05:46+08:00</updated>
-  <id>http://graylocus.github.io/</id>
-  <author>
-    <name><![CDATA[Gray Locus]]></name>
-    
-  </author>
-  <generator uri="http://octopress.org/">Octopress</generator>
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>RunLoop 深入分析 - Gray Locus的小窝</title>
+	<meta name="author" content="Gray Locus">
 
+	
+	<meta name="description" content="RunLoop 深入分析 这篇是 RunLoop概念初解的进阶篇，会在代码层面，对 RunLoop 相关概念进行详解。 目标
+通过本文要达到的目标： 1.熟悉RunLoop工作流程 2.清楚各类型Mode Item(Source, Observer, Timer)及其工作时机 3. &hellip;">
+	
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="Gray Locus的小窝" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://graylocus.github.io/blog/2016/06/18/runloop-shen-ru-fen-xi/">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><div class="profilepic">	
+	<script src="/javascripts/md5.js"></script>
+	<script type="text/javascript">
+		document.write("<img src='http://www.gravatar.com/avatar/" + MD5("") + "?s=160' alt='Profile Picture' style='width: 160px;' />");
+	</script>
+</div>
+<h1><a href="/">Gray Locus的小窝</a></h1>
+<p class="subtitle">点滴成行.</p>
+<nav id="main-nav"><ul class="main-navigation">
+  <li><a href="/">Blog 博客</a></li>
+  <li><a href="/blog/archives">Archives 归档</a></li>
+  <li><a href="/about">About 关于</a></li>
+</ul>
+</nav>
+<nav id="sub-nav">
+	<div class="social">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+</nav>
+<hgroup>
+  <h1><a href="/">Gray Locus的小窝</a></h1>
   
-  <entry>
-    <title type="html"><![CDATA[RunLoop 深入分析]]></title>
-    <link href="http://graylocus.github.io/blog/2016/06/18/runloop-shen-ru-fen-xi/"/>
-    <updated>2016-06-18T11:04:11+08:00</updated>
-    <id>http://graylocus.github.io/blog/2016/06/18/runloop-shen-ru-fen-xi</id>
-    <content type="html"><![CDATA[<p>这篇是 <a href="http://graylocus.github.io/blog/2016/06/05/runloopgai-nian-chu-jie/">RunLoop概念初解</a>的进阶篇，会在代码层面，对 RunLoop 相关概念进行详解。</p>
+    <h2>点滴成行.</h2>
+  
+</hgroup>
+
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			
+				
+			
+			<div class="mid-col-container">
+				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+	<h1 class="title" itemprop="name">RunLoop 深入分析</h1>
+	<div class="entry-content" itemprop="articleBody"><p>这篇是 <a href="http://graylocus.github.io/blog/2016/06/05/runloopgai-nian-chu-jie/">RunLoop概念初解</a>的进阶篇，会在代码层面，对 RunLoop 相关概念进行详解。</p>
 
 <!--more-->
 
@@ -139,7 +202,7 @@
 </span></code></pre></td></tr></table></div></figure>
 <p>它们之间的关系如图：</p>
 
-<p><img src="http://graylocus.github.io/images/blog/runloop_modes.png" /></p>
+<p><img src="/images/blog/runloop_modes.png" /></p>
 
 <p>Observer 可以观察的几个时机：</p>
 <figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
@@ -185,7 +248,7 @@ RunLoop的人口，在启动事件处理循环之前发出，之后就会正式�
 <h1 id="runloop-1">RunLoop处理流程：</h1>
 <p>大致的流程如下图所示：</p>
 
-<p><img src="http://graylocus.github.io/images/blog/runloop_sequence.png" /></p>
+<p><img src="/images/blog/runloop_sequence.png" /></p>
 
 <p>在sleep过程中，会被外部mach port接收到的message唤醒，或者被进程内部的timer唤醒。</p>
 
@@ -432,395 +495,49 @@ RunLoop的人口，在启动事件处理循环之前发出，之后就会正式�
 <h1 id="runloop-">RunLoop 的应用场景</h1>
 <p>##界面刷新</p>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Runloop 概念初解]]></title>
-    <link href="http://graylocus.github.io/blog/2016/06/05/runloopgai-nian-chu-jie/"/>
-    <updated>2016-06-05T18:51:43+08:00</updated>
-    <id>http://graylocus.github.io/blog/2016/06/05/runloopgai-nian-chu-jie</id>
-    <content type="html"><![CDATA[<blockquote>
-  <p>A run loop is an event processing loop that you use to schedule work and coordinate the receipt of incoming events. The purpose of a run loop is to keep your thread busy when there is work to do and put your thread to sleep when there is none.</p>
+</div>
 
-  <p>Runloop是线程相关的基础框架，用来调度工作，协调到来的事件和接收者之间的关系。它的主要目的是在有工作要做时将线程置于busy状态，在无工作要做时将线程置于sleep状态。
-(打个比喻：RunLoop就像一个发动机引擎，负责把各类型的事件和任务分发给需要的对象，并执行相应的处理函数)
-<!--more-->
-Runlop的管理不完全是自动化的，你需要设计你的代码在正确的时间启动Runloop，响应到来的事件。Cocoa和CoreFoundation都提供了Runloop相关的对象帮助你来配置和管理线程Runloop。</p>
-</blockquote>
+</article>
 
-<p>App主线程在创建时已经绑定了runloop对象并且已经启动，但是子线程需要手动启动runloop。</p>
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style addthis_16x16_style">
+	
+	<a class="addthis_button_sinaweibo"></a>
+	
+	
+	
+	
+	
+	<a class="addthis_button_compact"></a>
+	<a class="addthis_counter addthis_bubble_style"></a>
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/300/addthis_widget.js#pubid="></script>
+</div>
 
-<p>下面几个小节提供了关于如何配置runloop的信息。</p>
 
-<h1 id="runloop">1.Runloop初窥</h1>
-<p>Runloop顾名思义就是一个循环，在这个循环里线程执行各种到来事件的响应处理函数。
-Runloop接收两种来自不同类型的source的事件，InputSource和TimerSource。
-InputSource会传递异步事件，通常是来自另一个线程或者不同App的消息。
-TimerSource传递同步事件，发生在一个确定的时间或者是以一定的时间间隔重复性的发生。
-这两种类型的source都是用application-specific handler来处理到来的事件。</p>
+</div>
+			</div>
+			<footer id="footer" class="inner"><p>
+  Copyright &copy; 2016 - Gray Locus -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
 
-<p><img src="https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/Multithreading/Art/runloop.jpg" /></p>
+Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a></footer>
+			<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
 
-<p>为了处理InputSource，Runloop也会产生关于它自身的一些行为的通知，注册Runloop observer会接收到这些通知，可以利用这些通知处理函数做些额外的工作。</p>
 
-<h1 id="runloop-modes">2.Runloop Modes</h1>
-<p>Runloop是由一组被监听的InputSource和Timer和一组被通知的RunloopObserver组成的。
-<strong><em>(S.O.T组合)</em></strong></p>
 
-<p>Runloop有几种不同的模式(mode)，可以手动指定Runloop运行在哪种mode下，在某个具体的mode下，只有和该mode相关的source才会被监听，才被允许传递事件。同样地，只有mode相关的observer才会被通知Runloop的进度改变。
-而那些和其他modes绑定的source则会被挂起，直到Runloop切换到适当的mode。
-<strong><em>(Mode的概念相当重要)</em></strong></p>
 
-<p>Runloop不同的mode：
-&gt;1.<strong><em>default</em></strong>，NSDefaultRunloopMode，用于大多数操作，通常情况下，你应该是用这种mode启动runloop，配置input source。
-&gt;
-&gt;2.<strong><em>connection</em></strong>，NSConnectionReplyMode，Cocoa使用这种mode和NSConnection来协同监听响应，该模式很少用
-&gt;
-&gt;3.<strong><em>modal</em></strong>，NSModalPanelRunLoopMode，
-&gt;
-&gt;4.<strong><em>event tracking</em></strong>，NSEventTrackingRunLoopMode，在鼠标拖动和其他类似的UI跟踪情况下会进入这种模式，该模式会限制其他到来的事件。
-&gt;
-&gt;5.<strong><em>common modes</em></strong>，NSRunLoopCommonModes，不是一个具体的mode，是一类mode的统称，具有特殊的作用，对Cocoa应用来说，common modes默认包含default/modal/event tracking这几种modes</p>
 
-<h1 id="input-source">3.Input Source</h1>
-<p>Input Source有两类，基于<strong>Port</strong>的InputSource和<strong>自定义</strong>的InputSource，基于Port的Source会监听应用程序的Mach Ports，自定义的Source用来监听自定义的Source事件。
-这两类Source的唯一区别是它们的触发方式不同，基于Port的Source是由内核自动触发，而自定义的Source一定要由另外一个线程手动触发。</p>
 
-<h1 id="timer-source">4.Timer Source</h1>
-<p>Timer Source用来在一个预设置的时间点产生同步事件，实际上，Timer机制并不是一个实时机制，Timer是有一个Tolerance的，即允许一定的时间误差，Runloop每秒会flush整个Runloop中的消息队列多次，每次都会检查注册的Timer是否触发，如果触发，则执行该Timer注册的处理函数。</p>
 
-<p>注册到Runloop的Timer都是与特定的Runloop Mode绑定的，如果当前Runloop的Mode与Timer注册的Mode不一致，这个Timer的定时处理函数将不会被执行。</p>
-
-<h1 id="runloop-observer">5.Runloop Observer</h1>
-<p>Runloop除了处理input source外，还会生成各种关于Runloop行为的通知，这可以在Runloop循环内的不同时机做些额外的处理工作，Core Foundation提供了相应的API以用来注册接收这些通知。</p>
-
-<p>Runloop有以下几个时机可以被observe：</p>
-
-<blockquote>
-  <p>1.The entrance to the run loop.</p>
-
-  <p>2.When the run loop is about to process a timer.</p>
-
-  <p>3.When the run loop is about to process an input source.</p>
-
-  <p>4.When the run loop is about to go to sleep.</p>
-
-  <p>5.When the run loop has woken up, but before it has processed the event that woke it up.</p>
-
-  <p>6.The exit from the run loop.</p>
-</blockquote>
-
-<h1 id="runloop-1">6.Runloop执行序列</h1>
-<blockquote>
-  <p>1.Notify observers that the run loop has been entered.</p>
-
-  <p>2.Notify observers that any ready timers are about to fire.</p>
-
-  <p>3.Notify observers that any input sources that are not port based are about to fire.</p>
-
-  <p>4.Fire any non-port-based input sources that are ready to fire.</p>
-
-  <p>5.If a port-based input source is ready and waiting to fire, process the event immediately. Go to step 9.</p>
-
-  <p>6.Notify observers that the thread is about to sleep.</p>
-
-  <p>7.Put the thread to sleep until one of the following events occurs:</p>
-
-  <ul>
-    <li>An event arrives for a port-based input source.</li>
-    <li>A timer fires.</li>
-    <li>The timeout value set for the run loop expires.</li>
-    <li>The run loop is explicitly woken up.</li>
-  </ul>
-
-  <p>8.Notify observers that the thread just woke up.</p>
-
-  <p>9.Process the pending event.</p>
-
-  <ul>
-    <li>If a user-defined timer fired, process the timer event and restart the loop. Go to step 2.</li>
-    <li>If an input source fired, deliver the event.</li>
-    <li>If the run loop was explicitly woken up but has not yet timed out, restart the loop. Go to step 2.
-10.Notify observers that the run loop has exited.</li>
-  </ul>
-</blockquote>
-
-<h1 id="section">问题：</h1>
-<p>何时会用到Runloop？
-The run method of UIApplication in iOS (or NSApplication in OS X) starts an application’s main loop as part of the normal startup sequence.</p>
-
-<blockquote>
-  <p>1.Use ports or custom input sources to communicate with other threads.</p>
-
-  <p>2.Use timers on the thread.</p>
-
-  <p>3.Use any of the performSelector… methods in a Cocoa application.</p>
-
-  <p>4.Keep the thread around to perform periodic tasks.</p>
-</blockquote>
-
-<p>Runloop的mode item
-Input Sources(Source0, source1), Timer Source 和 Observer
-Runloop的服务对象就是这些mode item
-Runloop的执行流程</p>
-
-<p>参考：<a href="https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/Multithreading/RunLoopManagement/RunLoopManagement.html#//apple_ref/doc/uid/10000057i-CH16-SW1">Apple Runloop 官方文档</a></p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[iOS 框架梳理]]></title>
-    <link href="http://graylocus.github.io/blog/2016/06/05/iosji-zhu-zong-jie/"/>
-    <updated>2016-06-05T10:52:16+08:00</updated>
-    <id>http://graylocus.github.io/blog/2016/06/05/iosji-zhu-zong-jie</id>
-    <content type="html"><![CDATA[<h1 id="section">1.语言</h1>
-
-<h2 id="cc">C/C++标准库相关：</h2>
-<blockquote>
-  <p>#include &lt;types.h&gt;</p>
-
-  <p>#include &lt;stddef.h&gt;</p>
-
-  <p>#include &lt;stdio.h&gt;</p>
-
-  <p>#include &lt;stdlib.h&gt;</p>
-
-  <p>#include &lt;string.h&gt;</p>
-</blockquote>
-
-<!--more-->
-<p>##Objective-C相关:
-位于user/include/objc/目录下</p>
-
-<blockquote>
-  <p>objc.h</p>
-
-  <p>runtime.h</p>
-
-  <p>objc-api.h</p>
-
-  <p>message.h</p>
-
-  <p>objc-sync.h</p>
-
-  <p>NSObjCRuntime.h</p>
-</blockquote>
-
-<h2 id="objective-c">Objective-C语言概念</h2>
-<blockquote>
-  <p>property</p>
-
-  <p>protocol</p>
-
-  <p>category</p>
-
-  <p>extension</p>
-
-  <p>selector</p>
-</blockquote>
-
-<blockquote>
-  <p>类与元类(Class &amp; MetaClass)</p>
-
-  <p>内存管理(引用计数，ARC)</p>
-
-  <p>Key-Value编码／Key-Value观察(KVC/KVO)</p>
-
-  <p>Block</p>
-
-  <p>大中枢派发(GCD)</p>
-
-  <p>多线程(@synchronized)</p>
-
-  <p>动态绑定(Dynamic Binding)</p>
-
-  <p>运行时(Runtime)</p>
-</blockquote>
-
-<h1 id="corefoundation">2.CoreFoundation</h1>
-
-<h2 id="base">Base相关头文件:</h2>
-
-<blockquote>
-  <p>#include &lt;CoreFoundation/CFBase.h&gt;</p>
-
-  <p>#include &lt;CoreFoundation/CFArray.h&gt;</p>
-
-  <p>#include &lt;CoreFoundation/CFBag.h&gt;</p>
-
-  <p>#include &lt;CoreFoundation/CFBinaryHeap.h&gt;</p>
-
-  <p>#include &lt;CoreFoundation/CFBitVector.h&gt;</p>
-
-  <p>#include &lt;CoreFoundation/CFByteOrder.h&gt;</p>
-
-  <p>#include &lt;CoreFoundation/CFCalendar.h&gt;</p>
-
-  <p>#include &lt;CoreFoundation/CFCharacterSet.h&gt;</p>
-
-  <p>#include &lt;CoreFoundation/CFData.h&gt;</p>
-
-  <p>#include &lt;CoreFoundation/CFDate.h&gt;</p>
-
-  <p>#include &lt;CoreFoundation/CFDateFormatter.h&gt;</p>
-
-  <p>#include &lt;CoreFoundation/CFDictionary.h&gt;</p>
-
-  <p>#include &lt;CoreFoundation/CFError.h&gt;</p>
-
-  <p>#include &lt;CoreFoundation/CFLocale.h&gt;</p>
-
-  <p>#include &lt;CoreFoundation/CFNumber.h&gt;</p>
-
-  <p>#include &lt;CoreFoundation/CFNumberFormatter.h&gt;</p>
-
-  <p>#include &lt;CoreFoundation/CFPreferences.h&gt;</p>
-
-  <p>#include &lt;CoreFoundation/CFPropertyList.h&gt;</p>
-
-  <p>#include &lt;CoreFoundation/CFSet.h&gt;</p>
-
-  <p>#include &lt;CoreFoundation/CFString.h&gt;</p>
-
-  <p>#include &lt;CoreFoundation/&gt;CFStringEncodingExt.h&gt;</p>
-
-  <p>#include &lt;CoreFoundation/CFTimeZone.h&gt;</p>
-
-  <p>#include &lt;CoreFoundation/CFTree.h&gt;</p>
-
-  <p>#include &lt;CoreFoundation/CFURL.h&gt;</p>
-
-  <p>#include &lt;CoreFoundation/CFURLAccess.h&gt;</p>
-
-  <p>#include &lt;CoreFoundation/CFUUID.h&gt;</p>
-
-  <p>#include &lt;CoreFoundation/CFUtilities.h&gt;</p>
-</blockquote>
-
-<h2 id="macios">MAC/iOS:</h2>
-
-<blockquote>
-  <p>#include &lt;CoreFoundation/CFBundle.h&gt;</p>
-
-  <p>#include &lt;CoreFoundation/CFMessagePort.h&gt;</p>
-
-  <p>#include &lt;CoreFoundation/CFPlugIn.h&gt;</p>
-
-  <p>#include &lt;CoreFoundation/CFRunLoop.h&gt;</p>
-
-  <p>#include &lt;CoreFoundation/CFStream.h&gt;</p>
-
-  <p>#include &lt;CoreFoundation/CFSocket.h&gt;</p>
-</blockquote>
-
-<h1 id="foundation">3.Foundation</h1>
-
-<blockquote>
-  <p>NSRunloop</p>
-
-  <p>NSThread</p>
-
-  <p>GCD</p>
-
-  <p>NSOperationQueue</p>
-
-  <p>I/O流</p>
-
-  <p>文件系统</p>
-
-  <p>Network</p>
-</blockquote>
-
-<blockquote>
-  <p>CoreGraphics(CG开头)，图形图像，以CoreFoundation为基础</p>
-
-  <p>CoreText(CT开头)，文本渲染，以CoreGraphics，CoreFoundation为基础</p>
-
-  <p>CFNetwork，以CoreFoundation为基础</p>
-
-  <p>CoreImage，以Foundation为基础</p>
-
-  <p>AVFoundation，以Foundation为基础</p>
-
-  <p>QuartzCore(CA开头)动画，显示，UIView的后端，以Foundation为基础，继承自NSObject</p>
-</blockquote>
-
-<h1 id="cocoatouch-uikit">4.CocoaTouch-UIKit</h1>
-<p>贴一个UIKit类结构图：</p>
-
-<p><img src="http://graylocus.github.io/images/blog/object_map.jpg" /></p>
-
-<p>协议：</p>
-
-<blockquote>
-  <p>NSObject</p>
-
-  <p>UIStateRestoring</p>
-
-  <p>NSCoding</p>
-
-  <p>NSCopying</p>
-</blockquote>
-
-<blockquote>
-  <p>KVC/KVO:(参考NSKeyValueCoding.h,NSSKeyValueObserving.h)</p>
-
-  <p>NSKeyValueCoding category</p>
-
-  <ul>
-    <li>(id)valueForKey:(NSString *)key;</li>
-    <li>(void)setValue:(nullable id)value forKey:(NSString *)key;</li>
-  </ul>
-
-  <p>NSSKeyValueObserving：</p>
-
-  <ul>
-    <li>(void)observeValueForKeyPath:(nullable NSString *)keyPath ofObject:(nullable id)object change:(nullable NSDictionary&lt;NSString*, id&gt; *)change context:(nullable void *)context;</li>
-    <li>(void)addObserver:(NSObject *)observer forKeyPath:(NSString *)keyPath options:(NSKeyValueObservingOptions)options context:(nullable void *)context;</li>
-    <li>(void)removeObserver:(NSObject *)observer forKeyPath:(NSString *)keyPath context:(nullable void *)context NS_AVAILABLE(10_7, 5_0);</li>
-    <li>(void)removeObserver:(NSObject *)observer forKeyPath:(NSString *)keyPath;</li>
-  </ul>
-</blockquote>
-
-<h1 id="tips">Tips</h1>
-<blockquote>
-  <h3 id="nilnilnullnullnsnull">nil/Nil/null/NULL/NSNull的比较</h3>
-  <p>1.nil 空的NSObject实例对象 
-#define nil __DARWIN_NULL
-#define __DARWIN_NULL ((void *)0)</p>
-
-  <p>2.Nil 空的NSObject类对象
-define Nil __DARWIN_NULL</p>
-
-  <p>3.null/NULL
-#define NULL ((void*)0)  指向0地址的指针</p>
-
-  <p>4.NSNull 
-一个代表空值的NSObject类，常用于集合中的占位对象</p>
-
-  <p>结论：
-(1)1nil=Nil=Null=NULL=(void *)0</p>
-
-  <p>(2)[nil message]返回NO，无异常抛出</p>
-
-  <p>(3)[NSNull message]抛出异常NSException</p>
-</blockquote>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[我的第一篇博客]]></title>
-    <link href="http://graylocus.github.io/blog/2016/06/04/oh/"/>
-    <updated>2016-06-04T01:23:21+08:00</updated>
-    <id>http://graylocus.github.io/blog/2016/06/04/oh</id>
-    <content type="html"><![CDATA[<p>赶在6.3晚上把博客搭好了，6.4日凌晨上线，这是个特殊的日子，仅此只为怀念。</p>
-
-<p>GitHub+Octopress的组合真是爽到爆啊，以后要开开心心写blog了。</p>
-
-]]></content>
-  </entry>
-  
-</feed>
+		</div>
+	</div>
+</body>
+</html>

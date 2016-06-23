@@ -3,11 +3,11 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>iOS框架梳理 - Gray Locus的小窝</title>
+	<title>iOS 框架梳理 - Gray Locus的小窝</title>
 	<meta name="author" content="Gray Locus">
 
 	
-	<meta name="description" content="iOS框架梳理 1.语言 C/C++标准库相关： #include &lt;types.h&gt; #include &lt;stddef.h&gt; #include &lt;stdio.h&gt; #include &lt;stdlib.h&gt; #include &lt;string.h &hellip;">
+	<meta name="description" content="iOS 框架梳理 1.语言 C/C++标准库相关： #include &lt;types.h&gt; #include &lt;stddef.h&gt; #include &lt;stdio.h&gt; #include &lt;stdlib.h&gt; #include &lt;string. &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,7 +79,7 @@
 			
 			<div class="mid-col-container">
 				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
-	<h1 class="title" itemprop="name">iOS框架梳理</h1>
+	<h1 class="title" itemprop="name">iOS 框架梳理</h1>
 	<div class="entry-content" itemprop="articleBody"><h1 id="section">1.语言</h1>
 
 <h2 id="cc">C/C++标准库相关：</h2>
@@ -95,8 +95,9 @@
   <p>#include &lt;string.h&gt;</p>
 </blockquote>
 
-<h2 id="objective-c">Objective-C相关:</h2>
-<p>位于user/include/objc/目录下</p>
+<!--more-->
+<p>##Objective-C相关:
+位于user/include/objc/目录下</p>
 
 <blockquote>
   <p>objc.h</p>
@@ -112,7 +113,7 @@
   <p>NSObjCRuntime.h</p>
 </blockquote>
 
-<h2 id="objective-c-1">Objective-C语言概念</h2>
+<h2 id="objective-c">Objective-C语言概念</h2>
 <blockquote>
   <p>property</p>
 
@@ -305,9 +306,11 @@ define Nil __DARWIN_NULL</p>
 一个代表空值的NSObject类，常用于集合中的占位对象</p>
 
   <p>结论：
-(1)1nil=Nil=Null=NULL=(void *)0
-(2)[nil message]返回NO，无异常抛出
-(3)[NSNull message]抛出异常NSException</p>
+(1)1nil=Nil=Null=NULL=(void *)0</p>
+
+  <p>(2)[nil message]返回NO，无异常抛出</p>
+
+  <p>(3)[NSNull message]抛出异常NSException</p>
 </blockquote>
 
 </div>
